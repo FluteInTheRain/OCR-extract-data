@@ -2,3 +2,6 @@
 /.venv
 /.vscode
 /models
+
+__pycache__
+__init__.py
