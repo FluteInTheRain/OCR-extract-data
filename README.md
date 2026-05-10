@@ -25,7 +25,7 @@ A two-stage Optical Character Recognition (OCR) pipeline that detects and reads 
 ---
 
 ## Architecture
-[![Bmm4ODQ.md.png](https://iili.io/Bmm4ODQ.md.png)](https://freeimage.host/i/Bmm4ODQ)
+![BmmQaRe.md.png](https://iili.io/BmmQaRe.png)
 ```
 Input Image
      │
