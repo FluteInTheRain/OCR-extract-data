@@ -1,3 +1,23 @@
+---
+license: mit
+title: OCR Two steps extracted data
+sdk: gradio
+sdk_version: "5.29.0"
+python_version: "3.12"
+app_file: gradio_app.py
+emoji: 👁
+colorFrom: yellow
+colorTo: green
+pinned: false
+thumbnail: >-
+  https://cdn-uploads.huggingface.co/production/uploads/697e078b46330c9edc5e6167/ldbPwVK7KPQf47ID-bMsT.png
+short_description: Detects and reads text from natural scene images.
+---
+
+# OCR Demo
+
+This app performs OCR using CRNN + CTC.
+
 # OCR Extract Data
 
 A two-stage Optical Character Recognition (OCR) pipeline that detects and reads text from natural scene images. A YOLO model first locates every text region in the image; a custom CRNN then transcribes each crop. The whole system is wrapped in an interactive **Gradio** web interface.
