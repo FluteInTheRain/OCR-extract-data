@@ -14,35 +14,18 @@ thumbnail: >-
 short_description: Detects and reads text from natural scene images.
 ---
 
-# OCR Demo
-
-This app performs OCR using CRNN + CTC.
-
 # OCR Extract Data
 
 A two-stage Optical Character Recognition (OCR) pipeline that detects and reads text from natural scene images. A YOLO model first locates every text region in the image; a custom CRNN then transcribes each crop. The whole system is wrapped in an interactive **Gradio** web interface.
 
----
-
 ## Demo
 
-> **Add a screen-recorded demo here.**
-> Replace the placeholder below with your own video file or a hosted link (YouTube, Loom, etc.).
-
-```
-[Demo video – coming soon]
-```
-
-To embed a local video in GitHub README:
-
-```html
-<video src="assets/demo.mp4" controls width="720"></video>
-```
+[![Watch the demo](https://img.youtube.com/vi/HTV8em2ZiJU/maxresdefault.jpg)](https://youtu.be/HTV8em2ZiJU)
 
 ---
 
 ## Architecture
-
+[![Bmm4ODQ.md.png](https://iili.io/Bmm4ODQ.md.png)](https://freeimage.host/i/Bmm4ODQ)
 ```
 Input Image
      │
