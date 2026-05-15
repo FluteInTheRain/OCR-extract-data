@@ -116,6 +116,28 @@ def build_recognition_transform() -> transforms.Compose:
     )
 
 
+_HF_REPO_ID = "nhatkhangnguyen/ocr_extract_data"
+
+
+def _resolve_model(models_path: Path, filename: str) -> Path:
+    """Return local path to model file, downloading from HF Hub if not present."""
+    local = models_path / filename
+    if local.exists():
+        return local
+    try:
+        from huggingface_hub import hf_hub_download
+    except Exception as e:
+        raise RuntimeError(
+            "Missing dependency 'huggingface_hub'. Install it first: pip install huggingface_hub"
+        ) from e
+    hf_hub_download(
+        repo_id=_HF_REPO_ID,
+        filename=filename,
+        local_dir=str(models_path),
+    )
+    return local
+
+
 def _clip_bbox(bbox: list[float], w: int, h: int) -> tuple[int, int, int, int]:
     x1, y1, x2, y2 = bbox
     x1i = int(max(0, min(w - 1, round(x1))))
@@ -151,7 +173,7 @@ def get_model_bundle(models_dir: str | Path | None = None) -> ModelBundle:
     root = Path(__file__).resolve().parents[1]
     models_path = Path(models_dir) if models_dir is not None else (root / "models")
 
-    yolo = YOLO(str(models_path / "text_detection.pt"))
+    yolo = YOLO(str(_resolve_model(models_path, "text_detection.pt")))
 
     chars = "0123456789abcdefghijklmnopqrstuvwxyz-"
     _, idx_to_char = build_vocab(chars)
@@ -167,7 +189,9 @@ def get_model_bundle(models_dir: str | Path | None = None) -> ModelBundle:
         unfreeze_layers=3,
     ).to(device)
 
-    state_dict = torch.load(models_path / "ocr_crnn.pt", map_location=device)
+    state_dict = torch.load(
+        _resolve_model(models_path, "ocr_crnn.pt"), map_location=device
+    )
     crnn.load_state_dict(state_dict)
     crnn.eval()
 
